@@ -1,0 +1,106 @@
+{
+	"tmall": [
+		{
+			"name": "华为Mate30",
+			"sales": 3000000,
+			"count": 2000
+		},
+		{
+			"name": "华为Mate30 Pro",
+			"sales": 2000000,
+			"count": 2000
+		},
+		{
+			"name": "华为Mate20",
+			"sales": 1000000,
+			"count": 2000
+		},
+		{
+			"name": "华为Mate20 Pro",
+			"sales": 990000,
+			"count": 2000
+		},
+		{
+			"name": "荣耀 9x",
+			"sales": 890000,
+			"count": 2000
+		},
+		{
+			"name": "oppo R31",
+			"sales": 690000,
+			"count": 2000
+		},
+		{
+			"name": "vivo",
+			"sales": 660000,
+			"count": 2000
+		},
+		{
+			"name": "iPhone 11",
+			"sales": 300000,
+			"count": 2000
+		},
+		{
+			"name": "小米 9",
+			"sales": 260000,
+			"count": 2000
+		},
+		{
+			"name": "华为 畅享10 Plus",
+			"sales": 180000,
+			"count": 2000
+		}
+	],
+	"jd": [
+		{
+			"name": "华为Mate30",
+			"sales": 4000000,
+			"count": 2000
+		},
+		{
+			"name": "华为Mate30 Pro",
+			"sales": 2060000,
+			"count": 2000
+		},
+		{
+			"name": "华为Mate20",
+			"sales": 1030000,
+			"count": 2000
+		},
+		{
+			"name": "华为Mate20 Pro",
+			"sales": 990000,
+			"count": 2000
+		},
+		{
+			"name": "荣耀 9x",
+			"sales": 890000,
+			"count": 2000
+		},
+		{
+			"name": "oppo R31",
+			"sales": 690000,
+			"count": 2000
+		},
+		{
+			"name": "vivo",
+			"sales": 660000,
+			"count": 2000
+		},
+		{
+			"name": "iPhone 11",
+			"sales": 300000,
+			"count": 2000
+		},
+		{
+			"name": "小米 9",
+			"sales": 260000,
+			"count": 2000
+		},
+		{
+			"name": "华为 畅享10 Plus",
+			"sales": 180000,
+			"count": 2000
+		}
+	]
+}

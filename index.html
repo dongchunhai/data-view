@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>双十一实时销售大屏</title>
+	<link rel="stylesheet" type="text/css" href="css/app.css" />
+</head>
+
+<body>
+	<div id="bodyBg">
+		<header id="header">
+			<h3 class="header-title">电商11.11数据大屏</h3>
+			<div class="header-info header-info-l">销售数据</div>
+			<div class="header-info header-info-r" onclick="setFullScreen()">日期：<span id="nowDate"></span></div>
+		</header>
+
+		<footer id="footer"></footer>
+
+		<div id="container">
+			<div id="flexCon">
+				<div class="flex-row">
+					<div class="flex-cell flex-cell-l">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">销售额</h3>
+							<div class="chart-div chart-done">
+								<div class="chart-loader">
+									<div class="loader"></div>
+								</div>
+								<div class="total-sale-num" id="total">
+								</div>
+								<div class="chart-div" id="channelSales">
+									<div class="chart-loader">
+										<div class="loader"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-c" style="padding-left:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">订单实时走势</h3>
+							<div class="chart-div" id="salesTrend">
+								<div class="chart-loader">
+									<div class="loader"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-r" style="padding-right:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">统计数据</h3>
+							<div class="chart-div chart-done">
+								<table class="data-t">
+									<tr>
+										<th><img src="img/icon-order.png" /></th>
+										<td>
+											<p><span id="orderCound" class="font-num color-golden ">12000</span></p>
+											<p>订单总数(单)</p>
+										</td>
+										<th><img src="img/icon-03.png" /></th>
+										<td>
+											<p><span id="salesVol" class="font-num color-golden ">10000</span></p>
+											<p>销售总量(万元)</p>
+										</td>
+									</tr>
+									<tr>
+										<th><img src="img/icon-03.png" /></th>
+										<td>
+											<p><span id="prePay" class="font-num color-golden ">110</span></p>
+											<p>人均消费(元)</p>
+										</td>
+										<th><img src="img/icon-rate.png" /></th>
+										<td>
+											<p><span id="ratio" class="font-num color-golden ">98 %</span></p>
+											<p>支付转化率</p>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="flex-row">
+					<div class="flex-cell flex-cell-l" style="padding-left:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">&nbsp;&nbsp;订单分布地图</h3>
+							<div class="chart-div" id="mapChart">
+								<div class="chart-loader">
+									<div class="loader"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-cr" style="padding-left:0;">
+						<h3 class="chart-title">各渠道商品销售TOP10</h3>
+						<h3 class="top-title">
+							<p>天猫</p>
+							<p>京东</p>
+						</h3>
+						<div class="chart-wrapper" style="
+						display: flex;justify-content: space-around;padding: 10px 30px 60px;">
+							<table class="data-t top-table">
+								<thead>
+									<tr>
+										<td>商品</td>
+										<td>支付金额（元）</td>
+										<td>销量（单）</td>
+									</tr>
+								</thead>
+								<tbody id="tmallTop">
+								</tbody>
+							</table>
+							<table class="data-t top-table" style="margin: 0 20px;">
+								<thead>
+									<tr>
+										<td>商品</td>
+										<td>支付金额（元）</td>
+										<td>销量（单）</td>
+									</tr>
+								</thead>
+								<tbody id="jdTop">
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/countUp.min.js"></script>
+	<script type="text/javascript" src="js/echarts.min.js"></script>
+	<script type="text/javascript" src="js/echarts-map-china.js"></script>
+	<script type="text/javascript" src="js/echarts-theme-shine.js"></script>
+	<script type="text/javascript" src="lib/geoCoordMap.js"></script>
+	<script type="text/javascript" src="lib/getCurrentTime.js"></script>
+	<script type="text/javascript" src="lib/getSalesData.js"></script>
+	<script type="text/javascript" src="lib/getTop10.js"></script>
+	<script type="text/javascript" src="lib/getSalesTrend.js"></script>
+	<script type="text/javascript" src="lib/getMapData.js"></script>
+	<script type="text/javascript">
+		const mapChart = echarts.init(document.getElementById("mapChart"), "shine");
+		const channelSales = echarts.init(document.getElementById("channelSales"), "shine");
+		const salesTrendChart = echarts.init(document.getElementById("salesTrend"), "shine");
+		function setFullScreen() { // 点击时间 设置全屏展示
+			document.body.requestFullscreen();
+		}
+		$(function () { //获取当天日期
+			(function () {
+				getCurrentTime();
+				setInterval(() => {
+					getCurrentTime();
+				}, 1000)
+			})();
+
+			getSalesData(channelSales);
+
+			getTop10();
+
+			getSalesTrend(salesTrendChart);
+
+			getMapData(mapChart);
+
+
+			//浏览器窗口大小变化时，重置报表大小
+			$(window).resize(function () {
+				// rankChart.resize();
+				// mapChart.resize();
+				// trendChart.resize();
+				// csrcChart.resize();
+			});
+		});
+
+	</script>
+</body>
+
+</html>
