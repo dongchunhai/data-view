@@ -10,4 +10,4 @@ demo 效果：
 
 ![Image text](https://raw.githubusercontent.com/dongchunhai/data-view/master/img/demo.png)
 
-参考： [https://github.com/yyhsong/iDataV](https://github.com/yyhsong/iDataV)
+参考：[sugar](https://cloud.baidu.com/product/sugar.html) && [yyhsong/iDataV](https://github.com/yyhsong/iDataV)
